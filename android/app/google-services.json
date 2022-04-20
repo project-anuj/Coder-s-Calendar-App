@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1005382107319",
+    "project_id": "coder-calender-7d13e",
+    "storage_bucket": "coder-calender-7d13e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005382107319:android:c71185a48d4cd2e3574d32",
+        "android_client_info": {
+          "package_name": "com.student.coders_calendar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005382107319-m8f3meiin9lec1ji9ksp69nog71dohpp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAigj7FX4y9K5dS8PbK3Tprsxe9uIN6644"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1005382107319-m8f3meiin9lec1ji9ksp69nog71dohpp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
