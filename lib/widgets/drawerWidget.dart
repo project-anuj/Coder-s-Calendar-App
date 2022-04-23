@@ -78,32 +78,32 @@ class DrawerWidget{
               Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AuthUI()));
             },
           ),
-          ListTile(
-            title: Text('Rate App'),
-            trailing: Icon(Icons.star),
-            // trailing: Transform.translate(
-            //   offset: Offset(
-            //       -MediaQuery.of(context).size.width * 0.03, 0),
-            //   child: Icon(Icons.star_rate),
-            // ),
-            onTap: (){
-              Functions().launchURL('https://play.google.com/store/apps/details?id=com.student.testing');
-            },
-          ),
-          ListTile(
-            title: Text('Share App'),
-            trailing: Icon(Icons.share),
-            // trailing: Transform.translate(
-            //     // offset: Offset(
-            //     //     -MediaQuery.of(context).size.width * 0.15, 0),
-            //     child: Icon(Icons.share)),
-            onTap:  () async {
-              await Share.share(
-               'https://play.google.com/store/apps/details?id=com.student.testing',
-                subject: 'Download ',
-              );
-            },
-          ),
+          // ListTile(
+          //   title: Text('Rate App'),
+          //   trailing: Icon(Icons.star),
+          //   // trailing: Transform.translate(
+          //   //   offset: Offset(
+          //   //       -MediaQuery.of(context).size.width * 0.03, 0),
+          //   //   child: Icon(Icons.star_rate),
+          //   // ),
+          //   onTap: (){
+          //     Functions().launchURL('https://play.google.com/store/apps/details?id=com.student.testing');
+          //   },
+          // ),
+          // ListTile(
+          //   title: Text('Share App'),
+          //   trailing: Icon(Icons.share),
+          //   // trailing: Transform.translate(
+          //   //     // offset: Offset(
+          //   //     //     -MediaQuery.of(context).size.width * 0.15, 0),
+          //   //     child: Icon(Icons.share)),
+          //   onTap:  () async {
+          //     await Share.share(
+          //      'https://play.google.com/store/apps/details?id=com.student.testing',
+          //       subject: 'Download ',
+          //     );
+          //   },
+          // ),
         ],
       );
     }

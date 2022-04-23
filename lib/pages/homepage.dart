@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                 bottomRight: Radius.circular(40),
               ),
               child: SizedBox(
-                height: 410,
+                height: 300,
                 width: 250,
                 child: Drawer(
                   child: DrawerWidget().drawer(context,notifyHelper),
