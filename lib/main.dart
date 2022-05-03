@@ -1,5 +1,6 @@
 import 'package:coders_calendar/database/db_helper.dart';
 import 'package:coders_calendar/pages/homepage.dart';
+import 'package:coders_calendar/pages/signUp_signIn.dart';
 import 'package:coders_calendar/services/notification_service.dart';
 import 'package:coders_calendar/services/theme_notification_service.dart';
 import 'package:coders_calendar/services/theme_services.dart';
@@ -58,14 +59,15 @@ class MyApp extends StatelessWidget {
       darkTheme: Themes.dark,
       themeMode: ThemeServices().theme,
       // home: HomePage(),
-      home: AnimatedSplashScreen(
-        splash: Image.asset('lib/assets/images/splash_Screen.png'),
-        splashIconSize: 280,
-        backgroundColor: Get.isDarkMode?Colors.black54:Colors.white,
-        splashTransition: SplashTransition.scaleTransition,
-        nextScreen: HomePage(),
-      )
-      // home: HomePage(),
+      // home: AnimatedSplashScreen(
+      //   splash: Image.asset('lib/assets/images/splash_Screen.png'),
+      //   splashIconSize: 280,
+      //   backgroundColor: Get.isDarkMode?Colors.black54:Colors.white,
+      //   splashTransition: SplashTransition.scaleTransition,
+      //   nextScreen: HomePage(),
+      // )
+      home: HomePage(),
+      // home: SignUpSignIn(),
       // home: SplashScreen(),
     );
   }

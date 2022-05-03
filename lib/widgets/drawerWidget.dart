@@ -22,9 +22,9 @@ class DrawerWidget{
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const[
 
-                  SizedBox(
-                    height: 50,
-                  ),
+                  // SizedBox(
+                  //   height: 50,
+                  // ),
                   Center(
                     child: Text(
                       "CODER'S CALENDAR",
@@ -36,7 +36,7 @@ class DrawerWidget{
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   Center(
                     child: Text(
@@ -48,17 +48,26 @@ class DrawerWidget{
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Center(
+                    child: CircleAvatar(
+                      backgroundColor: Colors.indigoAccent,
+                      child: Text('A'),
+                    ),
+                  )
                 ],
               ),
             ),
           ),
-          // ListTile(
-          //   title: Text('Get Notified'),
-          //   trailing: Icon(Icons.notifications_active),
-          //   onTap: () {
-          //     Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NotificationList()));
-          //   },
-          // ),
+          ListTile(
+            title: Text('Get Notified'),
+            trailing: Icon(Icons.notifications_active),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NotificationList()));
+            },
+          ),
           ListTile(
             title: Text('Dark Mode'),
             trailing: Icon(Icons.dark_mode),
@@ -74,6 +83,13 @@ class DrawerWidget{
           ListTile(
             title: Text('Admin'),
             trailing: Icon(Icons.admin_panel_settings_sharp),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AuthUI()));
+            },
+          ),
+          ListTile(
+            title: Text('Sign Out'),
+            trailing: Icon(Icons.logout),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AuthUI()));
             },

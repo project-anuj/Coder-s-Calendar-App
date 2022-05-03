@@ -103,16 +103,16 @@ class ContestListWidget{
                 SizedBox(
                   width: 10,
                 ),
-                // GestureDetector(
-                //   onTap: (){
-                //     // NotificationService().scheduleNotification(name,seconds);
-                //     AlarmDialog().dialogWidget(context,0,name);
-                //     DBFunctions().insertData(name,
-                //         date,
-                //         time);
-                //   },
-                //   child: ButtonDesign(text: 'Notify Me',icon: Icons.notifications_active_outlined).button(),
-                // ),
+                GestureDetector(
+                  onTap: (){
+                    // NotificationService().scheduleNotification(name,seconds);
+                    AlarmDialog().dialogWidget(context,0,name);
+                    DBFunctions().insertData(name,
+                        date,
+                        time);
+                  },
+                  child: ButtonDesign(text: 'Notify Me',icon: Icons.notifications_active_outlined).button(),
+                ),
               ],
             ),
           ],
