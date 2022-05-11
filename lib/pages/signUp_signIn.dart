@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../widgets/forgetPassword.dart';
+
 class SignUpSignIn extends StatefulWidget {
   const SignUpSignIn({Key? key}) : super(key: key);
 
@@ -15,11 +17,14 @@ class SignUpSignIn extends StatefulWidget {
 
 class _SignUpSignInState extends State<SignUpSignIn> {
   bool isSignIn = false;
+  bool isForgetPassword = false;
+
   @override
   void initState() {
     super.initState();
     setState(() {
       isSignIn = false;
+      isForgetPassword = false;
     });
   }
   @override
@@ -52,6 +57,7 @@ class _SignUpSignInState extends State<SignUpSignIn> {
               ),
               SizedBox(height: 40,),
 
+              // ForgetPasswordWidget(),
               isSignIn==false?SignUpWidget():SignInWidget(),
               SizedBox(
                 height: 20,

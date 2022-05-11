@@ -2,14 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SignInWidget extends StatelessWidget {
-  const SignInWidget({Key? key}) : super(key: key);
+class ForgetPasswordWidget extends StatelessWidget {
+  const ForgetPasswordWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
     TextEditingController _emailController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
 
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -19,7 +18,7 @@ class SignInWidget extends StatelessWidget {
       ),
       child: Column(
         children:  [
-          Text('Sign In',style:TextStyle(
+          Text('Forget Password',style:TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold
           ) ,),
@@ -44,44 +43,16 @@ class SignInWidget extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 15,),
-                    TextFormField(
-                      validator: (val){
-                        if(val==null || val.isEmpty){
-                          return "Please enter password";
-                        }
-                        return null;
-                      },
-                      obscureText: true,
-                      obscuringCharacter: '*',
-                      controller: _passwordController,
-                      decoration: InputDecoration(
-                        labelText: 'Enter the password',
-                        enabledBorder: OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
+
+
                     MaterialButton(onPressed: (){},
                       color: Colors.indigoAccent,
-                      child: Text('Sign In',style: TextStyle(
+                      child: Text('Send Link',style: TextStyle(
                           color: Colors.white
                       ),),
                       height: 45,
                       minWidth: 200,
                     ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    InkWell(
-                      onTap: (){
-                        // Navigator.of(context)
-                      },
-                      child: Text('Forget Password?',style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),),
-                    )
                   ],
                 )),
           ),

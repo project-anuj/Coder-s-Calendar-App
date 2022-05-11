@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1005382107319-d2g90d028kun46ghdmk4591gatfs7ena.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.student.coders_calendar",
+            "certificate_hash": "a96965920b8f1ff2f67463f25a6038a6867922f4"
+          }
+        },
+        {
           "client_id": "1005382107319-m8f3meiin9lec1ji9ksp69nog71dohpp.apps.googleusercontent.com",
           "client_type": 3
         }
