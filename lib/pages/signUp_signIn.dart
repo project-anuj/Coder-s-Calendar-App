@@ -31,28 +31,31 @@ class _SignUpSignInState extends State<SignUpSignIn> {
   Widget build(BuildContext context) {
     return  Material(
       color: Colors.white,
-      borderRadius:  BorderRadius.only(
-        topLeft: Radius.circular(15),
-        topRight: Radius.circular(15),
-      ),
+      borderRadius:  BorderRadius.all(Radius.circular(20)),
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height*(2/3),
         child: SingleChildScrollView(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:  [
               Padding(
                 padding: EdgeInsets.only(top:10,right: 20),
                 child: Align(
                   alignment: Alignment.topRight,
-                  child: Text('Later',style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    decorationThickness: 1,
-                  ),),
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Later',style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                      decorationThickness: 1,
+                    ),),
+                  ),
                 ),
               ),
               SizedBox(height: 40,),

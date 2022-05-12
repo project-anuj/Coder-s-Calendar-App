@@ -21,6 +21,7 @@ class ContestList extends StatefulWidget {
 class _ContestListState extends State<ContestList> {
 
   late List list=[];
+
   @override
   void initState() {
     super.initState();
@@ -97,13 +98,13 @@ class _ContestListState extends State<ContestList> {
                     return ContestListWidget().contestUi(context, url, name, date, time, duration, status,timeDiffInSecond);
                   }),
         ),
-          Container(
-            color: Colors.black54,
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SignUpSignIn(),
-          )
+         //  Container(
+         //    color: Colors.black54,
+         //  ),
+         // Align(
+         //    alignment: Alignment.bottomCenter,
+         //    child: SignUpSignIn(),
+         //  )
     ]
       ),
     );
