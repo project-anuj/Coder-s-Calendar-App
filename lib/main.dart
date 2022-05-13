@@ -59,14 +59,14 @@ class MyApp extends StatelessWidget {
       darkTheme: Themes.dark,
       themeMode: ThemeServices().theme,
       // home: HomePage(),
-      // home: AnimatedSplashScreen(
-      //   splash: Image.asset('lib/assets/images/splash_Screen.png'),
-      //   splashIconSize: 280,
-      //   backgroundColor: Get.isDarkMode?Colors.black54:Colors.white,
-      //   splashTransition: SplashTransition.scaleTransition,
-      //   nextScreen: HomePage(),
-      // )
-      home: HomePage(),
+      home: AnimatedSplashScreen(
+        splash: Image.asset('lib/assets/images/splash_Screen.png'),
+        splashIconSize: 280,
+        backgroundColor: Get.isDarkMode?Colors.black54:Colors.white,
+        splashTransition: SplashTransition.scaleTransition,
+        nextScreen: HomePage(),
+      )
+      // home: HomePage(),
       // home: SignUpSignIn(),
       // home: SplashScreen(),
     );

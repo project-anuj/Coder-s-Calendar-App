@@ -34,7 +34,7 @@ class _SignUpSignInState extends State<SignUpSignIn> {
       borderRadius:  BorderRadius.all(Radius.circular(20)),
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height*(2/3),
+        // height: MediaQuery.of(context).size.height*(2/3),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,

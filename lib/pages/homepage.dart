@@ -99,9 +99,12 @@ class _HomePageState extends State<HomePage> {
           //   color: Colors.black54,
           // ),
           // Align(
-          //   alignment: Alignment.bottomCenter,
-          //   child: SignUpSignIn(),
-          // )
+          //   alignment: Alignment.center,
+          //   child: Container(
+          //     padding: EdgeInsets.only(left: 15,right: 15),
+          //     child: SignUpSignIn(),
+          //   ),
+          // ),
         ],
       )
     );
