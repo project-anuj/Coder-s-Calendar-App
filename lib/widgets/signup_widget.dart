@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpWidget extends StatefulWidget {
   const SignUpWidget({Key? key}) : super(key: key);
@@ -108,7 +109,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     try{
       final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text, password: _passwordController.text);
-      Navigator.of(context).pop();
+      // Navigator.of(context).pop();
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('userEmail', _emailController.text);
     } on FirebaseAuthException catch(e){
       if(e.code == 'weak-password'){
         print('The password provided is too weak.');

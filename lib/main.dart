@@ -58,7 +58,6 @@ class MyApp extends StatelessWidget {
       theme: Themes.light,
       darkTheme: Themes.dark,
       themeMode: ThemeServices().theme,
-      // home: HomePage(),
       home: AnimatedSplashScreen(
         splash: Image.asset('lib/assets/images/splash_Screen.png'),
         splashIconSize: 280,
@@ -66,9 +65,6 @@ class MyApp extends StatelessWidget {
         splashTransition: SplashTransition.scaleTransition,
         nextScreen: HomePage(),
       )
-      // home: HomePage(),
-      // home: SignUpSignIn(),
-      // home: SplashScreen(),
     );
   }
 }

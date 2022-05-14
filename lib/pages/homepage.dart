@@ -7,6 +7,7 @@ import 'package:coders_calendar/services/theme_notification_service.dart';
 import 'package:coders_calendar/widgets/drawerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,8 +17,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var notifyHelper;
+
   int _currentIndex = 0;
+  late String? userEmail = null;
   PageController _pageController = PageController();
 
 
@@ -47,10 +49,12 @@ class _HomePageState extends State<HomePage> {
                       bottomRight: Radius.circular(40),
                     ),
                     child: SizedBox(
-                      height: 410,
+                      height: (userEmail!=null && userEmail=="anujsharma16921@gmail.com")?410
+                          :(userEmail!=null) ?350:300
+                      ,
                       width: 250,
                       child: Drawer(
-                        child: DrawerWidget().drawer(context,notifyHelper),
+                        child: DrawerWidget(),
                       ),
                     ),
                   ),
@@ -112,9 +116,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState(){
     super.initState();
+    getSharedPref();
     _pageController = PageController();
-    notifyHelper = NotifyHelper();
-    notifyHelper.initializeNotification();
+  }
+  getSharedPref()async{
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userEmail = prefs.getString('userEmail');
+    });
   }
   @override
   void dispose() {

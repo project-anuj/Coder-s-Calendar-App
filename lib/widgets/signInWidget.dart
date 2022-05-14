@@ -1,8 +1,10 @@
 import 'package:coders_calendar/widgets/snackBar.dart';
+import 'package:coders_calendar/widgets/toastWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInWidget extends StatefulWidget {
   const SignInWidget({Key? key}) : super(key: key);
@@ -119,8 +121,11 @@ class _SignInWidgetState extends State<SignInWidget> {
           email: _emailController.text,
           password: _passwordController.text,
       );
-      print(credential.user);
-      // Navigator.of(context).pop();
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('userEmail', _emailController.text);
+      var email = prefs.getString('userEmail');
+      Navigator.of(context).pop();
+      ToastWidget().toast("$email logged in successfully");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');

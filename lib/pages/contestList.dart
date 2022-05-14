@@ -7,6 +7,7 @@ import 'package:coders_calendar/widgets/contest_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:coders_calendar/functions/functions.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ContestList extends StatefulWidget {
   String platformName;
@@ -21,12 +22,20 @@ class ContestList extends StatefulWidget {
 class _ContestListState extends State<ContestList> {
 
   late List list=[];
-
+  late String? userEmail = "";
   @override
   void initState() {
     super.initState();
     getContest(widget.url, widget.contestList);
+    getSharedPref();
     sortList(list);
+  }
+  getSharedPref()async{
+    final prefs = await SharedPreferences.getInstance();
+   setState(() {
+     userEmail = prefs.getString('userEmail');
+     userEmail ??= "";
+   });
   }
   sortList(contestList)
   {
@@ -60,7 +69,7 @@ class _ContestListState extends State<ContestList> {
           ),
           body:
           // (widget.contestList.length == 0) || (widget.contestList.length == null)
-          (list.length==0)||( list==null)
+          (list.isEmpty)||( list==null)
             ? Center(
                 child: CircularProgressIndicator(),
               )
@@ -95,7 +104,7 @@ class _ContestListState extends State<ContestList> {
                     //
                     int timeDiffInSecond=60;
 
-                    return ContestListWidget().contestUi(context, url, name, date, time, duration, status,timeDiffInSecond);
+                    return ContestListWidget(url: url, name: name, date: date, time: time, duration: duration, status: status);
                   }),
         ),
          //  Container(
