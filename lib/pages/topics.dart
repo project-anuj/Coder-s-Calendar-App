@@ -13,31 +13,33 @@ class _TopicsState extends State<Topics> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder(
-        stream: _userStream,
-        builder: (BuildContext context,AsyncSnapshot<QuerySnapshot> snapshot){
-          if(snapshot.hasError){
-            return Text('Something went wrong');
-          }
-          if(snapshot.connectionState == ConnectionState.waiting) {
-            return Text('Loading...');
-          }
-          return ListView.builder(
-            primary: false,
-            scrollDirection: Axis.vertical,
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (BuildContext context,int index){
-              return  GestureDetector(
-                onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>InterviewTips(topic: snapshot.data!.docs[index]['title'],)));
-                },
-                child: TopicItem(title: snapshot.data!.docs[index]['title']).topicItem(),
-              );
-            },
-          );
-        },
+    return SafeArea(
+      child: Scaffold(
+        body: StreamBuilder(
+          stream: _userStream,
+          builder: (BuildContext context,AsyncSnapshot<QuerySnapshot> snapshot){
+            if(snapshot.hasError){
+              return Text('Something went wrong');
+            }
+            if(snapshot.connectionState == ConnectionState.waiting) {
+              return Text('Loading...');
+            }
+            return ListView.builder(
+              primary: false,
+              scrollDirection: Axis.vertical,
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (BuildContext context,int index){
+                return  GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>InterviewTips(topic: snapshot.data!.docs[index]['title'],)));
+                  },
+                  child: TopicItem(title: snapshot.data!.docs[index]['title']).topicItem(),
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

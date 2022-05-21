@@ -1,8 +1,10 @@
 import 'package:coders_calendar/database/db_functions.dart';
+import 'package:coders_calendar/firebase/firebase_service.dart';
 import 'package:coders_calendar/functions/functions.dart';
 import 'package:coders_calendar/pages/contestList.dart';
 import 'package:coders_calendar/pages/signUp_signIn.dart';
 import 'package:coders_calendar/services/notification_service.dart';
+import 'package:coders_calendar/web_view/webview.dart';
 import 'package:coders_calendar/widgets/alarmDialog.dart';
 import 'package:coders_calendar/widgets/buttonDesign.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +58,8 @@ class _ContestListWidgetState extends State<ContestListWidget> {
           children: [
             InkWell(
               onTap: (){
-                Functions().launchURL(widget.url);
+               Navigator.of(context).push(MaterialPageRoute(builder: (_)=> WebViewPage(url: widget.url, title: widget.name)));
+                // Functions().launchURL(widget.url);
               },
               child: Column(
                 crossAxisAlignment:
@@ -146,7 +149,7 @@ class _ContestListWidgetState extends State<ContestListWidget> {
                     // DBFunctions().insertData(name,
                     //     date,
                     //     time);
-                    print("Hello");
+                    // print("Hello");
 
 
                     print(userEmail);
@@ -156,9 +159,11 @@ class _ContestListWidgetState extends State<ContestListWidget> {
                           insetPadding: EdgeInsets.only(left: 15,right: 15),
                           child: SignUpSignIn(),
                           // clipBehavior: Clip.antiAliasWithSaveLayer,
-                        )):DBFunctions().insertData(widget.name,
-                        widget.date,
-                        widget.time);
+                        )):
+                    FirebaseService().addUsers(context,userEmail!, widget.name, widget.date, widget.time);
+                    // DBFunctions().insertData(widget.name,
+                    //     widget.date,
+                    //     widget.time);
                     setState(() {
                       getSharedPref();
                     });

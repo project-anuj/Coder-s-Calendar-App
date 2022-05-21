@@ -10,7 +10,7 @@ class MyItems{
     return Material(
       // color: Colors.white,
 
-      elevation: 14.0,
+      elevation: 2.0,
       // shadowColor: Get.isDarkMode?Colors.black54:Color(0xff802196F3),
       borderRadius: BorderRadius.circular(24.0),
       child: Center(

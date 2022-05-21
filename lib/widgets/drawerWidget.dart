@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coders_calendar/admin/authUi.dart';
 import 'package:coders_calendar/functions/functions.dart';
 import 'package:coders_calendar/pages/notificationList.dart';
+import 'package:coders_calendar/profile/profileSettings.dart';
+import 'package:coders_calendar/profile/profiles.dart';
 import 'package:coders_calendar/services/theme_services.dart';
 import 'package:coders_calendar/widgets/toastWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,6 +13,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../pages/topics.dart';
 import '../services/theme_notification_service.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -107,6 +110,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
           ),
         ),
+        ListTile(
+          title: Text('Profiles'),
+          trailing: Icon(Icons.apps_rounded),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserProfile()));
+          },
+        ),
         if(userEmail!=null) ListTile(
           title: Text('Get Notified'),
           trailing: Icon(Icons.notifications_active),
@@ -131,6 +141,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           trailing: Icon(Icons.admin_panel_settings_sharp),
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AuthUI()));
+          },
+        ),
+        ListTile(
+          title: Text('Settings'),
+          trailing: Icon(Icons.settings),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfileSettings()));
           },
         ),
         ListTile(

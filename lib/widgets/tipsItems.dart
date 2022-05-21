@@ -1,8 +1,10 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:coders_calendar/functions/functions.dart';
+import 'package:coders_calendar/web_view/webview.dart';
 import 'package:coders_calendar/widgets/buttonDesign.dart';
 import 'package:coders_calendar/widgets/snackBar.dart';
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class TipsItem{
   String sno,title,desc,link;
@@ -44,7 +46,9 @@ class TipsItem{
                    SizedBox(width: 10,),
                    InkWell(
                        onTap: (){
-                         Functions().launchURL(link);
+                         Navigator.of(context).push(MaterialPageRoute(builder: (_)=>WebViewPage(url: link, title: title)));
+                         // Functions().launchURL(link);
+                         // Functions().webview(link);
                        },
                        child: ButtonDesign(text: 'Open Link', icon: Icons.open_in_new).button()),
                  ],

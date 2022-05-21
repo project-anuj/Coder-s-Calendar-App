@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coders_calendar/pages/contests.dart';
 import 'package:coders_calendar/pages/signUp_signIn.dart';
 import 'package:coders_calendar/pages/topics.dart';
+import 'package:coders_calendar/profile/profiles.dart';
 import 'package:coders_calendar/services/theme_notification_service.dart';
 import 'package:coders_calendar/widgets/drawerWidget.dart';
 import 'package:flutter/material.dart';
@@ -49,8 +50,8 @@ class _HomePageState extends State<HomePage> {
                       bottomRight: Radius.circular(40),
                     ),
                     child: SizedBox(
-                      height: (userEmail!=null && userEmail=="anujsharma16921@gmail.com")?410
-                          :(userEmail!=null) ?350:300
+                      height: (userEmail!=null && userEmail=="anujsharma16921@gmail.com")?510
+                          :(userEmail!=null) ?350:400
                       ,
                       width: 250,
                       child: Drawer(
@@ -92,9 +93,9 @@ class _HomePageState extends State<HomePage> {
                       _currentIndex=index;
                     });
                   },
-                  children: [
+                  children:[
                     Contests(),
-                    Topics(),
+                      Topics(),
                   ],
                 ),
               )
