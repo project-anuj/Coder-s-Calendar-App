@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coders_calendar/admin/authUi.dart';
+import 'package:coders_calendar/constants/strings.dart';
 import 'package:coders_calendar/functions/functions.dart';
 import 'package:coders_calendar/pages/notificationList.dart';
 import 'package:coders_calendar/profile/profileSettings.dart';
 import 'package:coders_calendar/profile/profiles.dart';
 import 'package:coders_calendar/services/theme_services.dart';
+import 'package:coders_calendar/widgets/aboutDialog.dart';
 import 'package:coders_calendar/widgets/toastWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -78,34 +80,34 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ),
                   ),
                 ),
-                if(userEmail!=null) SizedBox(
+                 SizedBox(
                   height: 10,
                 ),
-                if(userEmail!=null) Center(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.indigoAccent,
-                    child: Text(userEmail![0].toString().toUpperCase(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                if(userEmail!=null)SizedBox(
-                  height: 10,
-                ),
-                if(userEmail!=null)
-                  Center(
-                    child: Text(
-                      userEmail!,
-                      style: TextStyle(
-                        color: Colors.white,
-                        // fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
+                //  Center(
+                //   child: CircleAvatar(
+                //     backgroundColor: Colors.indigoAccent,
+                //     child: Text(userEmail![0].toString().toUpperCase(),
+                //       style: TextStyle(
+                //         color: Colors.white,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // if(userEmail!=null)
+                //   Center(
+                //     child: Text(
+                //       userEmail!,
+                //       style: TextStyle(
+                //         color: Colors.white,
+                //         // fontWeight: FontWeight.bold,
+                //         fontSize: 14,
+                //       ),
+                //     ),
+                //   ),
               ],
             ),
           ),
@@ -117,7 +119,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>UserProfile()));
           },
         ),
-        if(userEmail!=null) ListTile(
+         ListTile(
           title: Text('Get Notified'),
           trailing: Icon(Icons.notifications_active),
           onTap: () {
@@ -136,7 +138,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             // notifyHelper.scheduledNotification();
           },
         ),
-        if(userEmail !=null && userEmail == "anujsharma16921@gmail.com")ListTile(
+         ListTile(
           title: Text('Admin'),
           trailing: Icon(Icons.admin_panel_settings_sharp),
           onTap: () {
@@ -150,26 +152,26 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProfileSettings()));
           },
         ),
-        ListTile(
-          title: Text('Sign Out'),
-          trailing: Icon(Icons.logout),
-          onTap: () async{
-            final prefs = await SharedPreferences.getInstance();
-            try{
-              FirebaseAuth.instance.signOut();
-              ToastWidget().toast("User Signed out Successfully");
-              prefs.remove('userEmail');
-              Navigator.of(context).pop();
-              setState(() {
-                userEmail = null;
-              });
-
-            }catch(e)
-            {
-              print(e);
-            }
-          },
-        ),
+        // ListTile(
+        //   title: Text('Sign Out'),
+        //   trailing: Icon(Icons.logout),
+        //   onTap: () async{
+        //     final prefs = await SharedPreferences.getInstance();
+        //     try{
+        //       FirebaseAuth.instance.signOut();
+        //       ToastWidget().toast("User Signed out Successfully");
+        //       prefs.remove('userEmail');
+        //       Navigator.of(context).pop();
+        //       setState(() {
+        //         userEmail = null;
+        //       });
+        //
+        //     }catch(e)
+        //     {
+        //       print(e);
+        //     }
+        //   },
+        // ),
         // ListTile(
         //   title: Text('Rate App'),
         //   trailing: Icon(Icons.star),

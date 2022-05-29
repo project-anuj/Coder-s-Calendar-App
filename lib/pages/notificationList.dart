@@ -1,4 +1,6 @@
+import 'package:coders_calendar/constants/strings.dart';
 import 'package:coders_calendar/database/db_helper.dart';
+import 'package:coders_calendar/widgets/aboutDialog.dart';
 import 'package:coders_calendar/widgets/buttonDesign.dart';
 import 'package:coders_calendar/widgets/dialogBox.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +33,17 @@ class _NotificationListState extends State<NotificationList> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('Notification List'),),
+        appBar: AppBar(title: Text('Notification List'),
+        actions: [
+          InkWell(
+              onTap: (){
+                AboutDialogWidget().dialogWidget(context,Strings().notificationListAboutTitle);
+              },
+              child: CircleAvatar(child: Icon(Icons.question_mark))),
+          SizedBox(width: 10,),
+        ],
+        ),
+
         body: ListView.builder(
             itemCount: _list.length,
             itemBuilder: (BuildContext context,int index)
@@ -68,16 +80,16 @@ class _NotificationListState extends State<NotificationList> {
                           color: Colors.black54,
                         ),),
                       SizedBox(height: 10,),
-                      InkWell(
-                          hoverColor: Colors.indigoAccent,
-                          onTap: (){
-                            DialogWidget().dialogWidget(context, id,title);
-
-                            setState(() {
-                              _list.removeAt(index);
-                            });
-                          },
-                          child: ButtonDesign(text: 'Delete Alarm', icon: Icons.auto_delete_outlined).button()),
+                      // InkWell(
+                      //     hoverColor: Colors.indigoAccent,
+                      //     onTap: (){
+                      //       DialogWidget().dialogWidget(context, id,title);
+                      //
+                      //       setState(() {
+                      //         _list.removeAt(index);
+                      //       });
+                      //     },
+                      //     child: ButtonDesign(text: 'Delete Alarm', icon: Icons.auto_delete_outlined).button()),
                     ],
                   ),
                   ),

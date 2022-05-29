@@ -13,6 +13,8 @@ import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:coders_calendar/functions/functions.dart';
+import 'package:add_2_calendar/add_2_calendar.dart';
+
 
 class ContestListWidget extends StatefulWidget {
   String url;
@@ -143,7 +145,15 @@ class _ContestListWidgetState extends State<ContestListWidget> {
                   width: 10,
                 ),
                 GestureDetector(
-                  onTap: ()async {
+                  onTap: (){
+
+                    // final Event event = Event(
+                    //     title: widget.name,
+                    //     startDate: DateTime.now(),
+                    //     endDate: DateTime.now().add(Duration(minutes: 30)),
+                    //   location: widget.url,
+                    // );
+                    // Add2Calendar.addEvent2Cal(event);
                     // NotificationService().scheduleNotification(name,seconds);
                     // AlarmDialog().dialogWidget(context,0,name);
                     // DBFunctions().insertData(name,
@@ -152,24 +162,25 @@ class _ContestListWidgetState extends State<ContestListWidget> {
                     // print("Hello");
 
 
-                    print(userEmail);
-                    userEmail == null ?showDialog(context: context,
-                        builder:(_)=>Dialog(
-                          backgroundColor: Colors.transparent,
-                          insetPadding: EdgeInsets.only(left: 15,right: 15),
-                          child: SignUpSignIn(),
-                          // clipBehavior: Clip.antiAliasWithSaveLayer,
-                        )):
-                    FirebaseService().addUsers(context,userEmail!, widget.name, widget.date, widget.time);
-                    // DBFunctions().insertData(widget.name,
-                    //     widget.date,
-                    //     widget.time);
-                    setState(() {
-                      getSharedPref();
-                    });
+                    // print(userEmail);
+                    // userEmail == null ?showDialog(context: context,
+                    //     builder:(_)=>Dialog(
+                    //       backgroundColor: Colors.transparent,
+                    //       insetPadding: EdgeInsets.only(left: 15,right: 15),
+                    //       child: SignUpSignIn(),
+                    //       // clipBehavior: Clip.antiAliasWithSaveLayer,
+                    //     )):
+                    // FirebaseService().addUsers(context,userEmail!, widget.name, widget.date, widget.time);
+                    DBFunctions().insertData(widget.name,
+                        widget.date,
+                        widget.time);
+                    // setState(() {
+                    //   getSharedPref();
+                    // });
+                    // print("heloo");
                   },
-                  child: ButtonDesign(text: 'Notify Me',
-                      icon: Icons.notifications_active_outlined).button(),
+                  child: ButtonDesign(text: 'Add to Calendar',
+                      icon: Icons.calendar_today).button(),
                 ),
               ],
             ),
@@ -179,12 +190,3 @@ class _ContestListWidgetState extends State<ContestListWidget> {
     );
   }
 }
-
-// class ContestListWidget{
-//
-//
-//   Widget contestUi(context,url,name,date,time,duration,status,seconds,userEmail){
-//     return
-//   }
-//
-// }

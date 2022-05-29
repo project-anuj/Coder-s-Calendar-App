@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   late String? userEmail = null;
   PageController _pageController = PageController();
+  int drawerHeight = 450;
 
 
   @override
@@ -50,8 +51,7 @@ class _HomePageState extends State<HomePage> {
                       bottomRight: Radius.circular(40),
                     ),
                     child: SizedBox(
-                      height: (userEmail!=null && userEmail=="anujsharma16921@gmail.com")?510
-                          :(userEmail!=null) ?350:400
+                      height:510
                       ,
                       width: 250,
                       child: Drawer(
