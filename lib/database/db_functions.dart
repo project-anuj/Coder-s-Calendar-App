@@ -5,11 +5,12 @@ class DBFunctions{
 
   final dbhelper = DatabaseHelper.instance;
 
-  void insertData(String title,String date,String time)async{
+  void insertData(String title,String date,String time,String start_time)async{
     Map<String,dynamic> row = {
       DatabaseHelper.columnTitle : title,
       DatabaseHelper.columnDate : date,
       DatabaseHelper.columnTime : time,
+      DatabaseHelper.columnStartTime : start_time
     };
     final id = await dbhelper.insert(row);
     print('id : $id'  );

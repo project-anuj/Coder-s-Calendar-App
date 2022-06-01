@@ -1,8 +1,6 @@
 import 'package:coders_calendar/constants/strings.dart';
 import 'package:coders_calendar/database/db_helper.dart';
 import 'package:coders_calendar/widgets/aboutDialog.dart';
-import 'package:coders_calendar/widgets/buttonDesign.dart';
-import 'package:coders_calendar/widgets/dialogBox.dart';
 import 'package:flutter/material.dart';
 
 class NotificationList extends StatefulWidget {
@@ -52,48 +50,57 @@ class _NotificationListState extends State<NotificationList> {
               String title = _list[index]['column_title'];
               String date = _list[index]['column_date'];
               String time = _list[index]['column_time'];
+              String start_time = _list[index]['start_time'];
+              print(start_time);
+              // var difference = DateTime.parse(start_time).difference(DateTime.now());
               int id =  _list[index]['id'];
-              return Card(
-                child: Container(
-                  padding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
-                  child:Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+              if(DateTime.parse(start_time).isAfter(DateTime.now()))
+                {
+                  return Card(
+                    child: Container(
+                      padding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
+                      child:Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
 
-                      Text(sno.toString()+".  "+title,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                          Text(sno.toString()+".  "+title,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 10,),
+                          Text('Date : '+date,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                            ),),
+                          SizedBox(height: 5,),
+                          Text('Time : '+time,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                            ),),
+                          SizedBox(height: 10,),
+                          // InkWell(
+                          //     hoverColor: Colors.indigoAccent,
+                          //     onTap: (){
+                          //       DialogWidget().dialogWidget(context, id,title);
+                          //
+                          //       setState(() {
+                          //         _list.removeAt(index);
+                          //       });
+                          //     },
+                          //     child: ButtonDesign(text: 'Delete Alarm', icon: Icons.auto_delete_outlined).button()),
+                        ],
                       ),
-                      SizedBox(height: 10,),
-                      Text('Date : '+date,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54,
-                        ),),
-                      SizedBox(height: 5,),
-                      Text('Time : '+time,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54,
-                        ),),
-                      SizedBox(height: 10,),
-                      // InkWell(
-                      //     hoverColor: Colors.indigoAccent,
-                      //     onTap: (){
-                      //       DialogWidget().dialogWidget(context, id,title);
-                      //
-                      //       setState(() {
-                      //         _list.removeAt(index);
-                      //       });
-                      //     },
-                      //     child: ButtonDesign(text: 'Delete Alarm', icon: Icons.auto_delete_outlined).button()),
-                    ],
-                  ),
-                  ),
-              );
+                    ),
+                  );
+                }
+              else{
+                return Container();
+              }
             }
         ),
       ),

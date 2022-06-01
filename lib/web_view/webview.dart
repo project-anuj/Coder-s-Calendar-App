@@ -18,6 +18,8 @@ class WebViewPage extends StatefulWidget {
 }
 
 class _WebViewPageState extends State<WebViewPage> {
+  int position = 1;
+
   @override
   void initState() {
     super.initState();
@@ -25,6 +27,7 @@ class _WebViewPageState extends State<WebViewPage> {
       WebView.platform = SurfaceAndroidWebView();
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,8 +36,9 @@ class _WebViewPageState extends State<WebViewPage> {
           body: WebView(
             initialUrl: widget.url,
             javascriptMode: JavascriptMode.unrestricted,
-          )
+          ),
       ),
     );
   }
+
 }

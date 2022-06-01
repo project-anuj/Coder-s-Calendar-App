@@ -13,6 +13,7 @@ class DatabaseHelper{
   static const columnTitle = 'column_title';
   static const columnDate = 'column_date';
   static const columnTime = 'column_time';
+  static const columnStartTime = 'start_time';
 
   static Database? _database ;
 
@@ -38,7 +39,8 @@ class DatabaseHelper{
       CREATE TABLE $table($columnID INTEGER PRIMARY KEY,
       $columnTitle TEXT NOT NULL,
       $columnDate TEXT NOT NULL,
-      $columnTime TEXT NOT NULL
+      $columnTime TEXT NOT NULL,
+      $columnStartTime TEXT
       )
       '''
     );

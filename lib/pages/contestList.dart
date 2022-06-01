@@ -19,13 +19,14 @@ class ContestList extends StatefulWidget {
   _ContestListState createState() => _ContestListState();
 }
 
-class _ContestListState extends State<ContestList> {
+class _ContestListState extends State<ContestList> with WidgetsBindingObserver{
 
   late List list=[];
   late String? userEmail = "";
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance!.addObserver(this);
     getContest(widget.url, widget.contestList);
     getSharedPref();
     sortList(list);
@@ -76,14 +77,15 @@ class _ContestListState extends State<ContestList> {
               : ListView.builder(
                   itemCount: list.length,
                   itemBuilder: (BuildContext context, int index) {
-                    String url,name,date,time,duration,status;
+                    String url,name,date,time,duration,status,start_time;
                     if(widget.platformName=='CODECHEF' || widget.platformName=='All in One')
                       {
                         url = list[index]['url'];
 
                         name =  list[index]['name'];
                         String startTime = list[index]['start_time'];
-                        String start_time = startTime.substring(0,10)+'T'+startTime.substring(11,19)+'.000z';
+                         start_time = startTime.substring(0,10)+'T'+startTime.substring(11,19)+'.000z';
+                        // print(start_time);
                         date = Functions().getDate(start_time);
                         time = Functions().getTime(start_time);
                         duration = Functions().getDuration(list[index]['duration']);
@@ -92,6 +94,7 @@ class _ContestListState extends State<ContestList> {
                     else{
                       url = list[index]['url'];
                       name =  list[index]['name'];
+                      start_time = list[index]['start_time'];
                       date = Functions().getDate(list[index]['start_time']);
                       time = Functions().getTime(list[index]['start_time']);
                       duration = Functions().getDuration(list[index]['duration']);
@@ -104,7 +107,7 @@ class _ContestListState extends State<ContestList> {
                     //
                     int timeDiffInSecond=60;
 
-                    return ContestListWidget(url: url, name: name, date: date, time: time, duration: duration, status: status);
+                    return ContestListWidget(url: url, name: name, date: date, time: time, duration: duration, status: status,start_time: start_time);
                   }),
         ),
          //  Container(
@@ -118,6 +121,20 @@ class _ContestListState extends State<ContestList> {
       ),
     );
   }
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    // switch(state) {
+    //   case AppLifecycleState.resumed:
+    //     print("Hello anuj 1");
+    //     break;
+    // }
+    print("Anuj ->" +state.toString());
+  }
 
-
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
 }

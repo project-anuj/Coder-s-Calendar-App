@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constants/strings.dart';
+import '../widgets/aboutDialog.dart';
+
 class ProfileSettings extends StatefulWidget {
   const ProfileSettings({Key? key}) : super(key: key);
 
@@ -53,7 +56,16 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          appBar: AppBar(title: Text('Settings'),),
+          appBar: AppBar(title: Text('Settings'),
+          actions: [
+            InkWell(
+                onTap: (){
+                  AboutDialogWidget().dialogWidget(context,Strings().settigsAboutTitle);
+                },
+                child: CircleAvatar(child: Icon(Icons.question_mark))),
+            SizedBox(width: 10,),
+          ],
+          ),
           body:SingleChildScrollView(
             child: Column(
               children: [
@@ -100,10 +112,10 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                             SizedBox(height: 10,),
                             formWidget(hackerEarthController,isEnableHackerEarth,6),
                             SizedBox(height: 20,),
-                            textWidget("kickStart Handle"),
-                            SizedBox(height: 10,),
-                            formWidget(kickStartController,isEnableKickStart,7),
-                            SizedBox(height: 20,),
+                            // textWidget("kickStart Handle"),
+                            // SizedBox(height: 10,),
+                            // formWidget(kickStartController,isEnableKickStart,7),
+                            // SizedBox(height: 20,),
                             textWidget("LeetCode Handle"),
                             SizedBox(height: 10,),
                             formWidget(leetCodeController,isEnableLeetCode,8),

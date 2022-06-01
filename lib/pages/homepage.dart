@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                       bottomRight: Radius.circular(40),
                     ),
                     child: SizedBox(
-                      height:510
+                      height:460
                       ,
                       width: 250,
                       child: Drawer(

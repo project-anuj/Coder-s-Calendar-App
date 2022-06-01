@@ -1,18 +1,12 @@
+import 'package:coders_calendar/constants/strings.dart';
 import 'package:coders_calendar/database/db_functions.dart';
-import 'package:coders_calendar/firebase/firebase_service.dart';
-import 'package:coders_calendar/functions/functions.dart';
-import 'package:coders_calendar/pages/contestList.dart';
-import 'package:coders_calendar/pages/signUp_signIn.dart';
-import 'package:coders_calendar/services/notification_service.dart';
 import 'package:coders_calendar/web_view/webview.dart';
-import 'package:coders_calendar/widgets/alarmDialog.dart';
 import 'package:coders_calendar/widgets/buttonDesign.dart';
+import 'package:coders_calendar/widgets/warningDialog.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:coders_calendar/functions/functions.dart';
 import 'package:add_2_calendar/add_2_calendar.dart';
 
 
@@ -23,31 +17,49 @@ class ContestListWidget extends StatefulWidget {
   String time;
   String duration;
   String status;
+  String start_time;
   ContestListWidget({required this.url,
   required this.name,
   required this.date,
   required this.time,
   required this.duration,
   required this.status,
+    required this.start_time
   });
 
   @override
   State<ContestListWidget> createState() => _ContestListWidgetState();
 }
 
-class _ContestListWidgetState extends State<ContestListWidget> {
-  late String? userEmail = null;
+class _ContestListWidgetState extends State<ContestListWidget> with WidgetsBindingObserver{
+  // late String? userEmail = null;
+  late bool? isAdded = false;
+  late bool? toggle = false;
+
   @override
   void initState(){
     super.initState();
-    getSharedPref();
+    WidgetsBinding.instance!.addObserver(this);
+    getSharedPref(widget.name);
+    toggle = false;
   }
-  getSharedPref()async{
+  // getSharedPref()async{
+  //   final prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     userEmail = prefs.getString('userEmail');
+  //   });
+  // }
+  getSharedPref(key)async{
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      userEmail = prefs.getString('userEmail');
+      isAdded = prefs.getBool(key);
     });
   }
+  setSharedPref(key,value)async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool(key, value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -106,8 +118,7 @@ class _ContestListWidgetState extends State<ContestListWidget> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Shimmer.fromColors(
-                            child: widget.status ==
-                                'CODING'
+                            child: (DateTime.parse(widget.start_time).isBefore(DateTime.now()))
                                 ? Text(
                               'LIVE',
                               style: TextStyle(
@@ -144,49 +155,76 @@ class _ContestListWidgetState extends State<ContestListWidget> {
                 SizedBox(
                   width: 10,
                 ),
-                GestureDetector(
+                 (isAdded ==null || isAdded ==false)?
+                 GestureDetector(
                   onTap: (){
-
-                    // final Event event = Event(
-                    //     title: widget.name,
-                    //     startDate: DateTime.now(),
-                    //     endDate: DateTime.now().add(Duration(minutes: 30)),
-                    //   location: widget.url,
-                    // );
-                    // Add2Calendar.addEvent2Cal(event);
-                    // NotificationService().scheduleNotification(name,seconds);
-                    // AlarmDialog().dialogWidget(context,0,name);
-                    // DBFunctions().insertData(name,
-                    //     date,
-                    //     time);
-                    // print("Hello");
-
-
-                    // print(userEmail);
-                    // userEmail == null ?showDialog(context: context,
-                    //     builder:(_)=>Dialog(
-                    //       backgroundColor: Colors.transparent,
-                    //       insetPadding: EdgeInsets.only(left: 15,right: 15),
-                    //       child: SignUpSignIn(),
-                    //       // clipBehavior: Clip.antiAliasWithSaveLayer,
-                    //     )):
-                    // FirebaseService().addUsers(context,userEmail!, widget.name, widget.date, widget.time);
-                    DBFunctions().insertData(widget.name,
-                        widget.date,
-                        widget.time);
-                    // setState(() {
-                    //   getSharedPref();
-                    // });
-                    // print("heloo");
+                    if(DateTime.parse(widget.start_time).isAfter(DateTime.now()))
+                    {
+                      print("Anuj1");
+                      setState(() {
+                        toggle = true;
+                      });
+                      final Event event = Event(
+                        title: widget.name,
+                        startDate: getStartTime(),
+                        endDate: getStartTime().add(Duration(minutes:getDuration() )),
+                        location: widget.url,
+                      );
+                      setSharedPref(widget.name, true);
+                      Add2Calendar.addEvent2Cal(event);
+                      DBFunctions().insertData(widget.name,
+                          widget.date,
+                          widget.time,
+                          widget.start_time
+                      );
+                      print("Anuj2");
+                    }
+                    else
+                      {
+                         WarningDialogWidget().dialogWidget(context, Strings().addToCalendarTitle);
+                      }
                   },
-                  child: ButtonDesign(text: 'Add to Calendar',
-                      icon: Icons.calendar_today).button(),
-                ),
+                  child: Container(
+                    color: toggle==true?Colors.greenAccent:Colors.transparent,
+                    child: ButtonDesign(text: toggle==false?'Add to Calendar':'Added',
+                        icon: toggle==false?Icons.calendar_today: Icons.check).button(),
+                  ),
+                ):Container(
+                   color: Colors.greenAccent,
+                  child: ButtonDesign(text: 'Added',
+                      icon: Icons.check).button(),
+                )
+
               ],
             ),
           ],
         ),
       ),
     );
+  }
+  getStartTime(){
+    return DateTime.parse(widget.start_time);
+  }
+  getDuration(){
+    int index = widget.duration.indexOf(':');
+    return int.parse(widget.duration.substring(0,index))*60 + int.parse(widget.duration.substring(index+1));
+  }
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async{
+    super.didChangeAppLifecycleState(state);
+    print("Anuj ->" +state.toString());
+    switch(state) {
+      case AppLifecycleState.resumed:
+        setState(() {
+
+        });
+        print("Hello anuj 2");
+        break;
+    }
   }
 }
